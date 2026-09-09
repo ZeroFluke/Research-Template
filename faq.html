@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ | ZeroFluke Research Assistant</title>
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="faq">
+
+<div data-include="partials/header.html"></div>
+
+<section class="hero hero-plain" style="padding-block:3.5rem 4.5rem;">
+  <div class="container hero-inner">
+    <span class="eyebrow">FAQ</span>
+    <h1 style="font-size:var(--step-3);">Answers to What Comes Up Most.</h1>
+    <p class="lead">Can't find what you need? The <a href="contact.html" style="color:var(--paper);text-decoration:underline;">contact form</a> reaches us directly.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-bottom:0;">
+  <div class="container" style="max-width:760px;">
+    <div class="faq-search-row">
+      <input type="text" id="faqSearch" placeholder="Search a topic, e.g. &quot;refund&quot; or &quot;revisits&quot;">
+      <select id="faqJump">
+        <option value="">Jump to a topic...</option>
+      </select>
+    </div>
+    <p class="field-hint" id="faqNoResults" style="display:none;">No matching topics. Try a different word, or use the contact form below.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="max-width:760px;">
+
+    <div class="faq-category">
+      <h2>Account &amp; Signup</h2>
+
+      <div class="faq-item">
+        <button class="faq-question">How do I sign up?<span class="faq-caret">&#9662;</span></button>
+        <div class="faq-answer">Fill in the signup form with your name, email, phone number, and password, then confirm your password. A verification link will be sent to your registered email. Click the link to verify your account, then log in using your email and password.</div>
+      </div>
+    </div>
+
+    <div class="faq-category">
+      <h2>Login</h2>
+
+      <div class="faq-item">
+        <button class="faq-question">I forgot my password.<span class="faq-caret">&#9662;</span></button>
+        <div class="faq-answer">Use "Forgot password" on the login page for a reset link sent to your email.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Can I sign in with Google?<span class="faq-caret">&#9662;</span></button>
+        <div class="faq-answer">Yes. If it's your first time signing up with Google, you'll be asked to provide a phone number to finish setting up your account. After that, signing in with Google is instant.</div>
+      </div>
+    </div>
+
+    <div class="faq-category">
+      <h2>Placing an Order</h2>
+
+      <div class="faq-item">
+        <button class="faq-question">What do I need to place an order?<span class="faq-caret">&#9662;</span></button>
+        <div class="faq-answer">Your academic level, field/programme, topic, referencing style, how many revisits you'd like, and your preferred deadline. Pricing updates live as you fill it in.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">How is pricing calculated?<span class="faq-caret">&#9662;</span></button>
+        <div class="faq-answer">Each academic level has a base price and a standard number of included revisits. Extra revisits cost a flat fee each. Asking for the work sooner than our standard timeline adds a percentage of the base price per day earlier, but never below a minimum turnaround floor.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">What about fieldwork or lab-based work?<span class="faq-caret">&#9662;</span></button>
+        <div class="faq-answer">Flag it as science-based work on the order form. That part is quoted separately, since costs vary a lot case by case, and the cost would be provided via your registered email after a market survey. If you already have the required materials or samples, you're welcome to provide them yourself. The same applies if your fieldwork or lab work is already being carried out elsewhere, you can share the results with us as they become available. Once we send you the cost details, you can reply and let us know which option works best for you.</div>
+      </div>
+    </div>
+
+    <div class="faq-category">
+      <h2>Payments</h2>
+
+      <div class="faq-item">
+        <button class="faq-question">How do I pay?<span class="faq-caret">&#9662;</span></button>
+        <div class="faq-answer">We accept a 70% upfront payment, with the balance due before final delivery, or full payment upfront for a small discount.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Is my payment secure?<span class="faq-caret">&#9662;</span></button>
+        <div class="faq-answer">Yes, all payments are processed through Paystack.</div>
+      </div>
+    </div>
+
+    <div class="faq-category">
+      <h2>Revisits</h2>
+
+      <div class="faq-item">
+        <button class="faq-question">What is a "revisit"?<span class="faq-caret">&#9662;</span></button>
+        <div class="faq-answer">A revisit is when we make corrections and edits to your work based on feedback you upload, most commonly your supervisor's comments, though any feedback you receive works the same way. Each academic level comes with a set number of revisits included.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">What if I run out of revisits?<span class="faq-caret">&#9662;</span></button>
+        <div class="faq-answer">You can top up more revisits at any point while your order is ongoing, at a flat fee per revisit.</div>
+      </div>
+    </div>
+
+    <div class="faq-category">
+      <h2>Plagiarism &amp; AI Checks</h2>
+
+      <div class="faq-item">
+        <button class="faq-question">What's included in a plagiarism and AI check?<span class="faq-caret">&#9662;</span></button>
+        <div class="faq-answer">You can request a plagiarism check, an AI detection check, or both together. Results are usually ready within 2 hours, and never take longer than 12 hours.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">What are exclusions, and do I need them?<span class="faq-caret">&#9662;</span></button>
+        <div class="faq-answer">Exclusions let you leave out sections like your bibliography, direct quotes, or preliminary pages from the plagiarism scan, matching what your university's policy allows. Check your school's handbook if you're not sure.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">What happens after my check is ready?<span class="faq-caret">&#9662;</span></button>
+        <div class="faq-answer">Your dashboard will show the report as ready, with a download button for your report. You can request an update at any time while it's in progress.</div>
+      </div>
+    </div>
+
+    <div class="faq-category">
+      <h2>Special Orders</h2>
+
+      <div class="faq-item">
+        <button class="faq-question">What's the difference between Proofreading and Literature Review?<span class="faq-caret">&#9662;</span></button>
+        <div class="faq-answer">Proofreading is for a document you've already written, priced by page count. Literature Review is a standalone review of existing works on your topic, priced by how many works you'd like reviewed.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">What formatting does my document need for proofreading?<span class="faq-caret">&#9662;</span></button>
+        <div class="faq-answer">Times New Roman, 12pt, double spaced. Documents that don't meet this may be retained while we follow up with you.</div>
+      </div>
+    </div>
+
+    <div class="faq-category">
+      <h2>Order Status</h2>
+
+      <div class="faq-item">
+        <button class="faq-question">How do I check my order status?<span class="faq-caret">&#9662;</span></button>
+        <div class="faq-answer">Your <a href="dashboard.html">dashboard</a> lists every order you've placed with its current status: Request Pending (awaiting payment), Ongoing, Completed, or Cancelled.</div>
+      </div>
+    </div>
+
+    <div class="faq-category">
+      <h2>Cancellation &amp; Refunds</h2>
+
+      <div class="faq-item">
+        <button class="faq-question">Can I cancel an order?<span class="faq-caret">&#9662;</span></button>
+        <div class="faq-answer">Yes, if you haven't paid yet, you can cancel it directly from your dashboard at no cost.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Can I get a refund after paying?<span class="faq-caret">&#9662;</span></button>
+        <div class="faq-answer">Yes, within 3 days of your payment, you can withdraw and request a refund directly from your dashboard, minus a small deduction. This only applies to your original upfront or full payment, not later balance payments.</div>
+      </div>
+    </div>
+
+    <div class="faq-category">
+      <h2>Delivery</h2>
+
+      <div class="faq-item">
+        <button class="faq-question">What format do I get my work in?<span class="faq-caret">&#9662;</span></button>
+        <div class="faq-answer">Interim drafts come as PDF. Final delivered work comes in both Word and PDF.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">What if I don't respond after delivery?<span class="faq-caret">&#9662;</span></button>
+        <div class="faq-answer">If you don't mark the work satisfactory within a set number of days after delivery, the order automatically completes.</div>
+      </div>
+    </div>
+
+    <div class="faq-category" style="margin-bottom:0;">
+      <h2>Still Stuck?</h2>
+      <div class="faq-item" style="border-bottom:none;">
+        <button class="faq-question">Something not covered here?<span class="faq-caret">&#9662;</span></button>
+        <div class="faq-answer">Use the <a href="contact.html">contact form</a>, we reply personally, usually within 1 to 2 business days.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div data-include="partials/footer.html"></div>
+<script src="js/main.js"></script>
+<script>
+  document.querySelectorAll(".faq-question").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      btn.closest(".faq-item").classList.toggle("open");
+    });
+  });
+
+  // Give every item and category a stable, findable id, and build the
+  // "Jump to a topic" dropdown from the actual page content rather than a
+  // hardcoded list, so it can never drift out of sync with the real FAQ.
+  (function setupFaqSearchAndJump() {
+    const jumpSelect = document.getElementById("faqJump");
+    const searchInput = document.getElementById("faqSearch");
+    const noResults = document.getElementById("faqNoResults");
+    let itemIndex = 0;
+
+    document.querySelectorAll(".faq-category").forEach(function (category) {
+      const categoryName = category.querySelector("h2").textContent;
+      const categoryGroup = document.createElement("optgroup");
+      categoryGroup.label = categoryName;
+
+      category.querySelectorAll(".faq-item").forEach(function (item) {
+        const questionBtn = item.querySelector(".faq-question");
+        const questionText = questionBtn.childNodes[0].textContent.trim();
+        const id = "faq-item-" + (itemIndex++);
+        item.id = id;
+
+        const option = document.createElement("option");
+        option.value = id;
+        option.textContent = questionText;
+        categoryGroup.appendChild(option);
+      });
+
+      jumpSelect.appendChild(categoryGroup);
+    });
+
+    jumpSelect.addEventListener("change", function () {
+      const id = jumpSelect.value;
+      if (!id) return;
+      const target = document.getElementById(id);
+      target.classList.add("open");
+      target.scrollIntoView({ behavior: "smooth", block: "center" });
+      jumpSelect.value = "";
+    });
+
+    searchInput.addEventListener("input", function () {
+      const query = searchInput.value.trim().toLowerCase();
+      let anyVisible = false;
+
+      document.querySelectorAll(".faq-category").forEach(function (category) {
+        let categoryHasMatch = false;
+
+        category.querySelectorAll(".faq-item").forEach(function (item) {
+          const text = item.textContent.toLowerCase();
+          const matches = !query || text.includes(query);
+          item.style.display = matches ? "" : "none";
+          if (matches) {
+            categoryHasMatch = true;
+            anyVisible = true;
+            if (query) item.classList.add("open");
+          }
+        });
+
+        category.style.display = categoryHasMatch ? "" : "none";
+      });
+
+      noResults.style.display = anyVisible ? "none" : "block";
+    });
+  })();
+</script>
+</body>
+</html>

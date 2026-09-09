@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Place a Request | ZeroFluke Research Assistant</title>
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://js.paystack.co/v1/inline.js"></script>
+</head>
+<body data-page="order">
+
+<div data-include="partials/header-app.html"></div>
+
+<section class="section" style="padding-block:2.5rem;">
+  <div class="container" style="max-width:760px;">
+
+    <h1 style="font-size:var(--step-2);margin-bottom:0.2rem;">Place a New Request</h1>
+    <p class="field-hint" style="margin-bottom:1.5rem;">Pricing updates as you fill this in. Nothing is charged until you confirm.</p>
+
+    <div class="order-type-toggle">
+      <button type="button" class="toggle-btn active" id="toggleResearchBtn">Research Order</button>
+      <button type="button" class="toggle-btn" id="toggleCheckBtn">Plagiarism &amp; AI Check</button>
+      <button type="button" class="toggle-btn" id="toggleSpecialBtn">Special Order</button>
+    </div>
+
+    <div id="statusBox" class="status-box"></div>
+
+    <div id="formLoading" class="dashboard-empty"><p>Loading pricing...</p></div>
+
+    <form id="orderForm" style="display:none;">
+
+      <div class="field">
+        <label for="ord-level">Academic level</label>
+        <select id="ord-level" required>
+          <option value="Article">Article (journal, peer-reviewed)</option>
+          <option value="Undergraduate">Undergraduate Project</option>
+          <option value="Masters">Masters</option>
+          <option value="PhD">PhD</option>
+          <option value="Postgraduate Seminar">Postgraduate Seminar Paper</option>
+          <option value="Professional Masters">Professional Masters</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="ord-field">Field / programme</label>
+        <input type="text" id="ord-field" placeholder="e.g. Computer Science" required>
+      </div>
+
+      <div class="field">
+        <div class="field-label-row">
+          <label for="ord-topic" style="margin-bottom:0;">Research topic</label>
+          <button type="button" class="info-icon" id="topicInfoBtn">i
+            <span class="info-popover" id="topicHint">Please enter your exact topic, word for word as it should appear on your work. Avoid abbreviations or shortened versions, this is what we'll research and write against.</span>
+          </button>
+        </div>
+        <input type="text" id="ord-topic" placeholder="Your working title or topic" required>
+      </div>
+
+      <div class="field">
+        <label for="ord-institution">Institution <span style="font-weight:400;color:var(--ink-soft);">(optional)</span></label>
+        <input type="text" id="ord-institution" placeholder="e.g. University of Abuja">
+      </div>
+
+      <div class="field">
+        <label for="ord-referencing">Referencing style</label>
+        <select id="ord-referencing" required>
+          <option value="">Select a style</option>
+          <option value="APA">APA</option>
+          <option value="MLA">MLA</option>
+          <option value="Harvard">Harvard</option>
+          <option value="Chicago">Chicago</option>
+          <option value="Vancouver">Vancouver</option>
+          <option value="IEEE">IEEE</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label style="display:flex;align-items:center;gap:0.5rem;font-weight:500;">
+          <input type="checkbox" id="ord-science" style="width:auto;">
+          This is science-based work requiring fieldwork, apparatus, or specimens
+        </label>
+        <p class="field-hint" id="scienceNote" style="display:none;">Fieldwork costs aren't included below. We'll follow up with a separate custom quote for that part.</p>
+      </div>
+
+      <div class="field">
+        <div class="field-label-row">
+          <label for="ord-revisits" style="margin-bottom:0;">Revisits</label>
+          <button type="button" class="info-icon" id="revisitsInfoBtn">i
+            <span class="info-popover" id="revisitsHint"></span>
+          </button>
+        </div>
+        <input type="number" id="ord-revisits" required>
+      </div>
+
+      <div class="field">
+        <div class="field-label-row">
+          <label for="ord-deadline" style="margin-bottom:0;">Deadline (days from now)</label>
+          <button type="button" class="info-icon" id="deadlineInfoBtn">i
+            <span class="info-popover" id="deadlineHint"></span>
+          </button>
+        </div>
+        <input type="number" id="ord-deadline" required>
+      </div>
+
+      <div class="order-meta-grid" style="background:var(--paper-dim);border-radius:12px;padding:1.1rem 1.25rem;margin-bottom:1.25rem;">
+        <div><div class="label">Base price</div><div class="value" id="sumBase">—</div></div>
+        <div><div class="label">Extra revisits</div><div class="value" id="sumRevisits">—</div></div>
+        <div><div class="label">Urgency</div><div class="value" id="sumUrgency">—</div></div>
+        <div><div class="label">Total</div><div class="value" id="sumTotal" style="color:var(--royal-blue);">—</div></div>
+      </div>
+
+      <div class="field">
+        <label style="display:flex;align-items:flex-start;gap:0.5rem;font-weight:400;font-size:0.88rem;">
+          <input type="checkbox" id="ord-attest" required style="width:auto;margin-top:0.2rem;">
+          I confirm the details above are accurate and I understand this work is for my own academic use, subject to ZeroFluke Research Assistant's terms.
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;" id="submitBtn">Place Request</button>
+    </form>
+
+    <form id="checkForm" style="display:none;">
+
+      <div class="field">
+        <label style="margin-bottom:0.6rem;">What do you need checked?</label>
+        <label style="display:flex;align-items:center;gap:0.5rem;font-weight:400;margin-bottom:0.5rem;">
+          <input type="checkbox" id="chk-plagiarism" style="width:auto;"> Plagiarism check
+        </label>
+        <label style="display:flex;align-items:center;gap:0.5rem;font-weight:400;">
+          <input type="checkbox" id="chk-ai" style="width:auto;"> AI content detection
+        </label>
+      </div>
+
+      <div class="field" id="exclusionsField" style="display:none;">
+        <div class="field-label-row">
+          <label style="margin-bottom:0;">Exclusions</label>
+          <button type="button" class="info-icon" id="exclusionsInfoBtn">i
+            <span class="info-popover">Pick whatever your university's plagiarism policy tells you to exclude. Most schools exclude the bibliography and directly quoted text by default; some also exclude preliminary pages (cover page, table of contents, etc). If you're not sure, check your school's research handbook or ask your supervisor before submitting.</span>
+          </button>
+        </div>
+        <label style="display:flex;align-items:center;gap:0.5rem;font-weight:400;margin-bottom:0.4rem;">
+          <input type="checkbox" id="excl-bibliography" style="width:auto;"> Bibliography
+        </label>
+        <label style="display:flex;align-items:center;gap:0.5rem;font-weight:400;margin-bottom:0.4rem;">
+          <input type="checkbox" id="excl-quotes" style="width:auto;"> Quotes
+        </label>
+        <label style="display:flex;align-items:center;gap:0.5rem;font-weight:400;">
+          <input type="checkbox" id="excl-prelim" style="width:auto;"> Preliminary pages
+        </label>
+      </div>
+
+      <div class="field">
+        <label for="chk-file">Upload your document</label>
+        <input type="file" id="chk-file" accept=".pdf,.doc,.docx" required>
+        <p class="field-hint" id="chkTurnaroundNote"></p>
+      </div>
+
+      <div class="order-meta-grid" style="background:var(--paper-dim);border-radius:12px;padding:1.1rem 1.25rem;margin-bottom:1.25rem;">
+        <div><div class="label">Total</div><div class="value" id="chkTotal" style="color:var(--royal-blue);">₦0</div></div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;" id="chkSubmitBtn">Continue to Payment</button>
+    </form>
+
+    <form id="specialForm" style="display:none;">
+
+      <div class="order-type-toggle" style="margin-bottom:1.5rem;">
+        <button type="button" class="toggle-btn active" id="specialSubProofreadingBtn">Proofreading</button>
+        <button type="button" class="toggle-btn" id="specialSubLitReviewBtn">Literature Review</button>
+      </div>
+
+      <div class="field" id="sp-lr-level-field" style="display:none;">
+        <label for="sp-lr-level">Which academic level is this for?</label>
+        <select id="sp-lr-level">
+          <option value="Article">Article</option>
+          <option value="Undergraduate">Undergraduate</option>
+          <option value="Masters">Masters</option>
+          <option value="PhD">PhD</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="sp-field">Field / programme</label>
+        <input type="text" id="sp-field" placeholder="e.g. Computer Science" required>
+      </div>
+
+      <div class="field">
+        <label for="sp-topic">Topic</label>
+        <input type="text" id="sp-topic" placeholder="Your working title or topic" required>
+      </div>
+
+      <div class="field">
+        <label for="sp-institution">Institution <span style="font-weight:400;color:var(--ink-soft);">(optional)</span></label>
+        <input type="text" id="sp-institution" placeholder="e.g. University of Abuja">
+      </div>
+
+      <div class="field">
+        <label for="sp-referencing">Referencing style</label>
+        <select id="sp-referencing" required>
+          <option value="">Select a style</option>
+          <option value="APA">APA</option>
+          <option value="MLA">MLA</option>
+          <option value="Harvard">Harvard</option>
+          <option value="Chicago">Chicago</option>
+          <option value="Vancouver">Vancouver</option>
+          <option value="IEEE">IEEE</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="sp-quantity" id="sp-quantity-label">Number of pages</label>
+        <input type="number" id="sp-quantity" min="1" required>
+      </div>
+
+      <div class="field" id="sp-file-field">
+        <label for="sp-file">Upload the document to be proofread</label>
+        <input type="file" id="sp-file" accept=".pdf,.doc,.docx">
+      </div>
+
+      <div class="field">
+        <div class="field-label-row">
+          <label for="sp-revisits" style="margin-bottom:0;">Revisits</label>
+          <button type="button" class="info-icon" id="spRevisitsInfoBtn">i
+            <span class="info-popover" id="spRevisitsHint"></span>
+          </button>
+        </div>
+        <input type="number" id="sp-revisits" required>
+      </div>
+
+      <div class="field">
+        <div class="field-label-row">
+          <label for="sp-deadline" style="margin-bottom:0;">Deadline (days from now)</label>
+          <button type="button" class="info-icon" id="spDeadlineInfoBtn">i
+            <span class="info-popover" id="spDeadlineHint"></span>
+          </button>
+        </div>
+        <input type="number" id="sp-deadline" required>
+      </div>
+
+      <div class="order-meta-grid" style="background:var(--paper-dim);border-radius:12px;padding:1.1rem 1.25rem;margin-bottom:1.25rem;">
+        <div><div class="label">Base price</div><div class="value" id="spSumBase">—</div></div>
+        <div><div class="label">Extra revisits</div><div class="value" id="spSumRevisits">—</div></div>
+        <div><div class="label">Urgency</div><div class="value" id="spSumUrgency">—</div></div>
+        <div><div class="label">Total</div><div class="value" id="spSumTotal" style="color:var(--royal-blue);">—</div></div>
+      </div>
+
+      <div class="field">
+        <label style="display:flex;align-items:flex-start;gap:0.5rem;font-weight:400;font-size:0.88rem;" id="sp-attest-label">
+          <input type="checkbox" id="sp-attest" required style="width:auto;margin-top:0.2rem;">
+          <span id="sp-attest-text">I confirm the details above are accurate and I understand this work is for my own academic use, subject to ZeroFluke Research Assistant's terms.</span>
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;" id="spSubmitBtn">Place Request</button>
+    </form>
+
+  </div>
+</section>
+
+<div class="modal-overlay" id="paymentConfirmModal">
+  <div class="modal-card">
+    <h3 style="margin-top:0;">Confirm Payment</h3>
+    <p>You are about to pay <strong id="paymentConfirmAmount"></strong>.</p>
+    <div class="order-actions" style="margin-top:1.25rem;">
+      <button class="btn btn-outline-dark" id="paymentCancelBtn">Cancel</button>
+      <button class="btn btn-primary" id="paymentConfirmBtn">Proceed to Payment</button>
+    </div>
+  </div>
+</div>
+
+<div data-include="partials/footer.html"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/main.js"></script>
+<script src="js/order.js"></script>
+</body>
+</html>

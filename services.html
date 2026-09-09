@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services and Pricing | ZeroFluke Research Assistant</title>
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="services">
+
+<div data-include="partials/header.html"></div>
+
+<section class="hero hero-plain" style="padding-block:3.5rem 4.5rem;">
+  <div class="container hero-inner">
+    <span class="eyebrow">Services &amp; Pricing</span>
+    <h1 style="font-size:var(--step-3);">The Right Support for Your Research</h1>
+    <p class="lead">Not every research project needs the same level of support. Our services are structured around the level of work involved, the support your project requires, and the time available to complete it. Choose the level that fits your project, and we'll be there to support you through the work.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid-4">
+      <div class="tier-card tier-clickable" data-level="Article">
+        <span class="tier-name">Article</span>
+        <p class="tier-desc">Publishable-quality research writing.</p>
+        <div id="tierPrice-Article" data-fallback="20000" style="font-family:var(--font-display);font-size:1.7rem;color:var(--deep-navy);margin:0.4rem 0;"></div>
+        <ul class="tier-list">
+          <li id="tierRevisits-Article">Minimum 5 revision rounds</li>
+          <li>Standard referencing styles</li>
+          <li>PDF drafts, Word + PDF final</li>
+        </ul>
+      </div>
+      <div class="tier-card tier-clickable" data-level="Undergraduate">
+        <span class="tier-name">Undergraduate</span>
+        <p class="tier-desc">Final-year project, start to finish.</p>
+        <div id="tierPrice-Undergraduate" data-fallback="35000" style="font-family:var(--font-display);font-size:1.7rem;color:var(--deep-navy);margin:0.4rem 0;"></div>
+        <ul class="tier-list">
+          <li id="tierRevisits-Undergraduate">Minimum 10 revision rounds</li>
+          <li>Standard referencing styles</li>
+          <li>PDF drafts, Word + PDF final</li>
+        </ul>
+      </div>
+      <div class="tier-card featured tier-clickable" data-level="Masters">
+        <span class="tier-name">Masters</span>
+        <p class="tier-desc">Thesis-level research and writing.</p>
+        <div id="tierPrice-Masters" data-fallback="75000" style="font-family:var(--font-display);font-size:1.7rem;color:var(--deep-navy);margin:0.4rem 0;"></div>
+        <ul class="tier-list">
+          <li id="tierRevisits-Masters">Minimum 10 revision rounds</li>
+          <li>Standard referencing styles</li>
+          <li>Fieldwork quote if science-based</li>
+          <li>PDF drafts, Word + PDF final</li>
+        </ul>
+      </div>
+      <div class="tier-card tier-clickable" data-level="PhD">
+        <span class="tier-name">PhD</span>
+        <p class="tier-desc">Doctoral research, including fieldwork.</p>
+        <div id="tierPrice-PhD" data-fallback="200000" style="font-family:var(--font-display);font-size:1.7rem;color:var(--deep-navy);margin:0.4rem 0;"></div>
+        <ul class="tier-list">
+          <li id="tierRevisits-PhD">Minimum 15 revision rounds</li>
+          <li>Standard referencing styles</li>
+          <li>Fieldwork quote if science-based</li>
+          <li>PDF drafts, Word + PDF final</li>
+        </ul>
+      </div>
+    </div>
+    <p class="text-center" style="margin-top:2rem;">
+      <a href="order.html" class="btn btn-primary">Get an instant price</a>
+    </p>
+    <p class="text-center field-hint">
+      Final pricing reflects your chosen revisits and deadline on the request form. Science-based work also includes a separate fieldwork quote.
+    </p>
+
+    <a href="#" id="checkInfoCard" class="check-info-card card-outline-blue">
+      <span class="tier-name">Plagiarism &amp; AI Detection Check</span>
+      <p class="tier-desc">Our services use Turnitin for Plagiarism and AI Detection Check, the same standard that Universities use. Get your work checked and have a chance to edit it before submitting the copy and risk being flagged by your university or reviewer.</p>
+      <span class="check-info-arrow">&#8594;</span>
+    </a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">Payment</span>
+    </div>
+    <div class="grid grid-3">
+      <div class="card card-outline-blue">
+        <h3>70% Upfront</h3>
+        <p>Pay 70% upfront to get your project started. The remaining balance is due shortly before final delivery.</p>
+      </div>
+      <div class="card card-outline-blue">
+        <h3>Pay in Full</h3>
+        <p>Pay the full amount upfront and receive a small discount, with nothing more to settle before final delivery.</p>
+      </div>
+      <div class="card card-outline-blue">
+        <h3>Change Your Mind?</h3>
+        <p>You can cancel your order and request a refund within 3 days of payment. A 10% deduction applies, and approved refunds are processed within 7 working days.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div data-include="partials/footer.html"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/main.js"></script>
+<script>
+
+  document.querySelectorAll(".tier-clickable").forEach(function (card) {
+    card.addEventListener("click", function () {
+      var level = card.getAttribute("data-level");
+      var loggedIn = !!localStorage.getItem("zf_clientId");
+      window.location.href = loggedIn
+        ? "order.html?level=" + encodeURIComponent(level)
+        : "signup.html";
+    });
+  });
+
+  document.getElementById("checkInfoCard").addEventListener("click", function (e) {
+    e.preventDefault();
+    var loggedIn = !!localStorage.getItem("zf_clientId");
+    window.location.href = loggedIn ? "order.html?type=check" : "signup.html";
+  });
+
+  function formatNaira(amount) {
+    return "₦" + Number(amount).toLocaleString("en-NG");
+  }
+
+  document.querySelectorAll("[data-fallback]").forEach(function (el) {
+    el.textContent = formatNaira(el.getAttribute("data-fallback"));
+  });
+</script>
+</body>
+</html>
