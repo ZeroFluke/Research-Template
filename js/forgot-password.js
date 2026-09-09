@@ -13,7 +13,7 @@ document.getElementById("forgotForm").addEventListener("submit", async function 
   btn.textContent = "Sending...";
 
   const { error } = await zfSupabase.auth.resetPasswordForEmail(email, {
-    redirectTo: window.location.origin + "/reset-password.html"
+    redirectTo: zfBaseUrl() + "reset-password.html"
   });
 
   btn.disabled = false;

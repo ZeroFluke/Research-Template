@@ -59,7 +59,7 @@ document.getElementById("googleLoginBtn").addEventListener("click", async functi
   const { error } = await zfSupabase.auth.signInWithOAuth({
     provider: "google",
     options: {
-      redirectTo: window.location.origin + "/dashboard.html"
+      redirectTo: zfBaseUrl() + "dashboard.html"
     }
   });
 
