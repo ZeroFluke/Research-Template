@@ -1,4 +1,54 @@
+const ZF_GOOGLE_CLIENT_ID = "305149507909-stpai58m35c6tmjjfr4cclgojjrau068.apps.googleusercontent.com";
+
 let itiInstance = null;
+
+async function zfSha256Hex(input) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(input);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+function zfRandomNonce() {
+  const array = new Uint8Array(16);
+  crypto.getRandomValues(array);
+  return Array.from(array, (b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function handleGoogleCredential(response) {
+  const { error } = await zfSupabase.auth.signInWithIdToken({
+    provider: "google",
+    token: response.credential,
+    nonce: window.zfGoogleRawNonce
+  });
+
+  if (error) {
+    showStatus(error.message, "error");
+    return;
+  }
+
+  window.location.href = "dashboard.html";
+}
+
+async function initGoogleButton() {
+  const rawNonce = zfRandomNonce();
+  window.zfGoogleRawNonce = rawNonce;
+  const hashedNonce = await zfSha256Hex(rawNonce);
+
+  google.accounts.id.initialize({
+    client_id: ZF_GOOGLE_CLIENT_ID,
+    callback: handleGoogleCredential,
+    nonce: hashedNonce
+  });
+
+  google.accounts.id.renderButton(document.getElementById("googleBtnWrap"), {
+    theme: "outline",
+    size: "large",
+    width: 320,
+    text: "signup_with"
+  });
+}
 
 document.addEventListener("DOMContentLoaded", async function () {
   const { data } = await zfSupabase.auth.getSession();
@@ -6,6 +56,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     window.location.href = "dashboard.html";
     return;
   }
+
+  initGoogleButton();
 
   const phoneInput = document.getElementById("su-phone");
   itiInstance = window.intlTelInput(phoneInput, {
@@ -100,15 +152,3 @@ async function handleSignupSubmit() {
   document.getElementById("signupForm").reset();
 }
 
-document.getElementById("googleSignupBtn").addEventListener("click", async function () {
-  const { error } = await zfSupabase.auth.signInWithOAuth({
-    provider: "google",
-    options: {
-      redirectTo: zfBaseUrl() + "dashboard.html"
-    }
-  });
-
-  if (error) {
-    showStatus(error.message, "error");
-  }
-});
